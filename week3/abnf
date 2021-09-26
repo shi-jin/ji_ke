@@ -1,0 +1,30 @@
+InputElement ::= whiteSpace | LineTerminator | Comment |Token
+    <!-- 空白 -->
+    WhileSpace ::= " "|" "
+    <!-- 换行符 -->
+    LineTerminator ::= "\n" |"\r"
+    <!-- 注释 单行多行注释-->
+
+    Comment ::= SingleLineComment |MultilineComment
+    <!-- 任何字符，可重复多个 -->
+    SingleLineComment ::= "/" "/"
+    <any>*
+        <!-- ([^*] | "*" [^/])* 非*号字符或者*+分页字符 ，可多次重复-->
+        MultilineComment ::= "/" "*" ([^*] | "*" [^/])* "*" "/"
+
+        <!-- 定义Token -->
+        <!-- 直接量 1.3  1.5  字符串直接量："asd"  单行字符串直接量 "asda"   true  false -->
+        <!-- 直接量 Literal    关键字Keywords  标识符Identifier  运算·Punctuator-->
+        Token ::= Literal | Keywords| Identifier | Punctuator
+        <!--  -->
+        Literal ::= NumberLiteral | BooLeanLiteral| StringLiteral | NullLiteral keyworda ::= "if" |"else"| "for" | " function"| ..... Punctuator ::= "+"|"-"|"*"|"/"|"{" | "}"| ...... Program ::= Statement+
+        <!--  -->
+        Statement ::= ExpressionStatement | IfStatement |ForStatement | WhileStatement
+        <!-- 变量声明  函数声明  -->
+        |VariableDeclaration | FunctionDeclaration | ClassDeclaration
+        <!--  -->
+        |BreakStatement | ContinueStatement | ReturnStatement | ThrowStatement |TryStatement | Block IfStatement ::= "if" "(" Expression ")" Statement Block = "{" Statement "}" TryStatement ::= "try" "{" Statement+ "}" "catch" "(" Expression ")" "{" Statement+"}"
+        "{"Statment+ "}" ExpressionStatement ::= Expression ";" Expression ::=AdditiveExpression AdditiveExpression ::= MultiplicativeExpression |AdditiveExpression ("+" | "-")MultiplicativeExpression
+        <!-- 单目运算 -->
+        MultiplicativeExpression ::=UnaryExpression |MultiplicativeExpression ("*"|"/")UnaryExpression UnaryExpression ::= PrimaryExpression | ("+"|"-" | "typeof")PrimaryExpression PrimaryExpression ::= "(" Expression ")" |Literal |Identifier
+        
